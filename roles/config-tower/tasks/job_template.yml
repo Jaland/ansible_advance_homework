@@ -14,12 +14,12 @@
 
 
 - name: Create vault credential
-    tower_credential:
-      name: "yum-repo-cred"
-      organization: "{{org_name}}"
-      state: present
-      kind: vault
-      vault_password: "ansible"
+  tower_credential:
+    name: "yum-repo-cred"
+    organization: "{{org_name}}"
+    state: present
+    kind: vault
+    vault_password: "ansible"
 
 - name: Job template for 3tier app deploy on QA Env
   tower_job_template:
