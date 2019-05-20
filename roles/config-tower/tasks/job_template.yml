@@ -30,7 +30,7 @@
     project: "{{proj_name}}"
     playbook: "{{app_deploy_playbook}}"
     credential: "{{ssh_cred_name}}"
-    vault-credential: "yum-repo-cred"
+    vault_credential: "yum-repo-cred"
     tower_config_file: "~/.tower_cli.cfg"
 
 - name: Associate IG to 3tier job template  
@@ -63,24 +63,58 @@
 
 - name: Associate IG to Smoke test job template 
   command: |
-    tower-cli job_template associate_ig --job_template "{{job_template_smoke_osp}}" --instance_group "{{instance_group_name}}"
+    tower-cli job_template associate_ig --job-template "{{job_template_smoke_osp}}" --instance-group "{{instance_group_name}}"
 
 - name: Job template for Provisioning AWS env
-  command: |
-    tower-cli job_template create --name "{{job_template_aws_provision}}" --job-type run --inventory "{{static_inventory_name}}" --project "{{proj_name}}" --playbook "{{aws_provision_playbook}}" --credential "{{ssh_cred_name}}" --extra-vars @/tmp/aws_jq_vars.yml
+    tower_job_template:
+      name: "{{job_template_aws_provision}}"
+      job_type: "run"
+      inventory: "{{static_inventory_name}}"
+      project: "{{proj_name}}"
+      playbook: "{{aws_provision_playbook}}"
+      credential: "{{ssh_cred_name}}"
+      extra_vars_path: "/tmp/aws_jq_vars.yml"
+      tower_config_file: "~/.tower_cli.cfg"
 
 - name: Job template for injecting AWS SSH keys
-  command: |
-    tower-cli job_template create --name "{{job_template_aws_ssh_keys}}" --job-type run --inventory "{{ec2_dynamic_inventory}}" --project "{{proj_name}}" --playbook "{{aws_ssh_playbook}}" --credential "{{opentlc_cred_name}}" --extra-vars @/tmp/tower_info.yml
+  tower_job_template:
+    name: "{{job_template_aws_ssh_keys}}"
+    job_type: "run"
+    inventory: "{{ec2_dynamic_inventory}}"
+    project: "{{proj_name}}"
+    playbook: "{{aws_provision_playbook}}"
+    credential: "{{opentlc_cred_name}}"
+    extra_vars_path: "/tmp/tower_info.yml"
+    tower_config_file: "~/.tower_cli.cfg"
+
 
 - name: Job template for checking AWS instances status
-  command: |
-    tower-cli job_template create --name "{{job_template_aws_status_check}}" --job-type run --inventory "{{ec2_dynamic_inventory}}" --project "{{proj_name}}" --playbook "{{aws_status_playbook}}" --credential "{{opentlc_cred_name}}"
+    tower_job_template:
+      name: "{{job_template_aws_status_check}}"
+      job_type: "run"
+      inventory: "{{ec2_dynamic_inventory}}"
+      project: "{{proj_name}}"
+      playbook: "{{aws_status_playbook}}"
+      credential: "{{opentlc_cred_name}}"
+      extra_vars_path: "/tmp/tower_info.yml"
 
 - name: Job template for 3tier AWS deploy
-  command: |
-    tower-cli job_template create --name "{{job_template_name_3tier_app_aws}}" --job-type run --inventory "{{ec2_dynamic_inventory}}" --project "{{proj_name}}" --playbook "{{app_deploy_playbook}}"  --vault-credential "yum-repo-cred"
+    tower_job_template:
+      name: "{{job_template_name_3tier_app_aws}}"
+      job_type: "run"
+      inventory: "{{ec2_dynamic_inventory}}"
+      project: "{{proj_name}}"
+      playbook: "{{app_deploy_playbook}}"
+      vault_credential: "yum-repo-cred"
+      tower_config_file: "~/.tower_cli.cfg"
 
 - name: Job template for smoke test aws instances
-  command: |
-    tower-cli job_template create --name "{{job_template_smoke_aws}}" --job-type run --inventory "{{ec2_dynamic_inventory}}" --project "{{proj_name}}" --playbook "{{aws_smoke_app_playbook}}" --vault-credential "yum-repo-cred"
+    tower_job_template:
+      name: "{{job_template_smoke_aws}}"
+      job_type: "run"
+      inventory: "{{ec2_dynamic_inventory}}"
+      project: "{{proj_name}}"
+      playbook: "{{aws_smoke_app_playbook}}"
+      vault_credential: "yum-repo-cred"
+      tower_config_file: "~/.tower_cli.cfg"
+
