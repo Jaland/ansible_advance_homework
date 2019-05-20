@@ -89,32 +89,32 @@
 
 
 - name: Job template for checking AWS instances status
-    tower_job_template:
-      name: "{{job_template_aws_status_check}}"
-      job_type: "run"
-      inventory: "{{ec2_dynamic_inventory}}"
-      project: "{{proj_name}}"
-      playbook: "{{aws_status_playbook}}"
-      credential: "{{opentlc_cred_name}}"
-      extra_vars_path: "/tmp/tower_info.yml"
+  tower_job_template:
+    name: "{{job_template_aws_status_check}}"
+    job_type: "run"
+    inventory: "{{ec2_dynamic_inventory}}"
+    project: "{{proj_name}}"
+    playbook: "{{aws_status_playbook}}"
+    credential: "{{opentlc_cred_name}}"
+    extra_vars_path: "/tmp/tower_info.yml"
 
 - name: Job template for 3tier AWS deploy
-    tower_job_template:
-      name: "{{job_template_name_3tier_app_aws}}"
-      job_type: "run"
-      inventory: "{{ec2_dynamic_inventory}}"
-      project: "{{proj_name}}"
-      playbook: "{{app_deploy_playbook}}"
-      vault_credential: "yum-repo-cred"
-      tower_config_file: "~/.tower_cli.cfg"
+  tower_job_template:
+    name: "{{job_template_name_3tier_app_aws}}"
+    job_type: "run"
+    inventory: "{{ec2_dynamic_inventory}}"
+    project: "{{proj_name}}"
+    playbook: "{{app_deploy_playbook}}"
+    vault_credential: "yum-repo-cred"
+    tower_config_file: "~/.tower_cli.cfg"
 
 - name: Job template for smoke test aws instances
-    tower_job_template:
-      name: "{{job_template_smoke_aws}}"
-      job_type: "run"
-      inventory: "{{ec2_dynamic_inventory}}"
-      project: "{{proj_name}}"
-      playbook: "{{aws_smoke_app_playbook}}"
-      vault_credential: "yum-repo-cred"
-      tower_config_file: "~/.tower_cli.cfg"
+  tower_job_template:
+    name: "{{job_template_smoke_aws}}"
+    job_type: "run"
+    inventory: "{{ec2_dynamic_inventory}}"
+    project: "{{proj_name}}"
+    playbook: "{{aws_smoke_app_playbook}}"
+    vault_credential: "yum-repo-cred"
+    tower_config_file: "~/.tower_cli.cfg"
 
