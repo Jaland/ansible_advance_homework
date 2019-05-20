@@ -97,6 +97,7 @@
     playbook: "{{aws_status_playbook}}"
     credential: "{{opentlc_cred_name}}"
     extra_vars_path: "/tmp/tower_info.yml"
+    tower_config_file: "~/.tower_cli.cfg"
 
 - name: Job template for 3tier AWS deploy
   tower_job_template:
