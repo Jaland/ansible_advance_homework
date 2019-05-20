@@ -66,15 +66,15 @@
     tower-cli job_template associate_ig --job-template "{{job_template_smoke_osp}}" --instance-group "{{instance_group_name}}"
 
 - name: Job template for Provisioning AWS env
-    tower_job_template:
-      name: "{{job_template_aws_provision}}"
-      job_type: "run"
-      inventory: "{{static_inventory_name}}"
-      project: "{{proj_name}}"
-      playbook: "{{aws_provision_playbook}}"
-      credential: "{{ssh_cred_name}}"
-      extra_vars_path: "/tmp/aws_jq_vars.yml"
-      tower_config_file: "~/.tower_cli.cfg"
+  tower_job_template:
+    name: "{{job_template_aws_provision}}"
+    job_type: "run"
+    inventory: "{{static_inventory_name}}"
+    project: "{{proj_name}}"
+    playbook: "{{aws_provision_playbook}}"
+    credential: "{{ssh_cred_name}}"
+    extra_vars_path: "/tmp/aws_jq_vars.yml"
+    tower_config_file: "~/.tower_cli.cfg"
 
 - name: Job template for injecting AWS SSH keys
   tower_job_template:
