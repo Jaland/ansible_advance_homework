@@ -20,6 +20,7 @@
     state: present
     kind: vault
     vault_password: "ansible"
+    tower_config_file: "~/.tower_cli.cfg/3teir"
 
 - name: Job template for 3tier app deploy on QA Env
   tower_job_template:
@@ -29,7 +30,7 @@
     project: "{{proj_name}}"
     playbook: "{{app_deploy_playbook}}"
     credential: "{{ssh_cred_name}}"
-    --vault-credential: "yum-repo-cred"
+    vault-credential: "yum-repo-cred"
     tower_config_file: "~/.tower_cli.cfg"
 
 - name: Associate IG to 3tier job template  
