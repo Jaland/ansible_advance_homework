@@ -20,7 +20,7 @@
     state: present
     kind: vault
     vault_password: "ansible"
-    tower_config_file: "~/.tower_cli.cfg/3teir"
+    tower_config_file: "~/.tower_cli.cfg"
 
 - name: Job template for 3tier app deploy on QA Env
   tower_job_template:
